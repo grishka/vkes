@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "VKontakte Enhancement Suite",
+  "description": "Brings back the good old VK website",
+  "version": "0.1",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "*://*.vk.com/",
+    "*://vk.com/"
+  ],
+  "content_scripts": [{
+    "matches": ["*://vk.com/*"],
+    "js": ["inject.js"],
+    "run_at": "document_end"
+  }],
+  "web_accessible_resources": ["vkes.js", "style.css"]
+}
