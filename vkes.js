@@ -6,7 +6,7 @@ stManager.done=function(s){
 	console.log("stManager.done("+s+")");
 
 	if(s.substr(-4)==".css"){
-		__reInjectCSS();
+		vkesReInjectCSS();
 	}
 	
 	vkesOrigStManagerDone.apply(this, arguments);
@@ -16,7 +16,7 @@ function vkesIsSettingEnabled(name){
 	return true;
 }
 
-var __wideExpanded=false;
+var vkesWideExpanded=false;
 
 if(vkesIsSettingEnabled("profiles_as_old")){
 	updateNarrow=function(){
@@ -27,9 +27,9 @@ if(vkesIsSettingEnabled("profiles_as_old")){
 		nc.style.bottom="";
 		if(hasClass(nc, "fixed"))
 			removeClass(nc, "fixed");
-		if(__wideExpanded!=nc.offsetHeight<-nc.getBoundingClientRect().top && (cur.module=="profile" || cur.module=="group" || cur.module=="public" || cur.module=="event")){
-			__wideExpanded=!__wideExpanded;
-			if(__wideExpanded){
+		if(vkesWideExpanded!=nc.offsetHeight<-nc.getBoundingClientRect().top && (cur.module=="profile" || cur.module=="group" || cur.module=="public" || cur.module=="event")){
+			vkesWideExpanded=!vkesWideExpanded;
+			if(vkesWideExpanded){
 				addClass(ge("wide_column"), "wide_expanded");
 			}else{
 				removeClass(ge("wide_column"), "wide_expanded");
@@ -59,10 +59,10 @@ function vkesOnAlDone(){
 		ge("page_body").style.width="627px";
 		ge("page_layout").style.width="790px";
 			if(cur.module=="profile" || cur.module=="public" || cur.module=="groups"){
-			__applyProfileChanges();
+			vkesApplyProfileChanges();
 		}
 			if(cur.module=="feed"){
-			__applyFeedChanges();
+			vkesApplyFeedChanges();
 		}
 			vkesResizeZhukovLayout();
 	}else if(cur.module!="app"){
@@ -112,7 +112,7 @@ function vkesOnPageLoaded(){
 	};*/
 }
 
-function __reInjectCSS(){
+function vkesReInjectCSS(){
 	window.postMessage({type: "reinject_css"}, "*");
 }
 
@@ -160,7 +160,7 @@ function vkesResizeZhukovLayout(){
 	}
 }
 
-function __toggleWallTab(){
+function vkesToggleWallTab(){
 	var wtabs=ge("wall_tabs");
 	var tabs=wtabs.querySelectorAll(".ui_tab");
 	(hasClass(tabs[0], "ui_tab_sel") ? tabs[1] : tabs[0]).click();
@@ -169,7 +169,7 @@ function __toggleWallTab(){
 	ge("wall_tab_value").innerHTML=tabTitle;
 }
 
-function __applyProfileChanges(){
+function vkesApplyProfileChanges(){
 	var wall=ge("profile_wall") || ge("public_wall") || ge("group_wall");
 	var postBox=wall.previousElementSibling;
 	wall.insertBefore(postBox, wall.children[1]);
@@ -182,7 +182,7 @@ function __applyProfileChanges(){
 	if(tabs.length>=2){
 		var tabTitle=(hasClass(tabs[0], "ui_tab_sel") ? tabs[1].innerHTML : tabs[0].innerHTML).trim();
 		tabTitle=tabTitle.substr(0, 1).toLowerCase()+tabTitle.substr(1);
-		wallHeader+='<div class="module_subheader"><a href="javascript:void(0)" onclick="__toggleWallTab()">Показать <span id="wall_tab_value">'+tabTitle+'</span></a>';
+		wallHeader+='<div class="module_subheader"><a href="javascript:void(0)" onclick="vkesToggleWallTab()">Показать <span id="wall_tab_value">'+tabTitle+'</span></a>';
 		//wallHeader+='| <a href="javascript:void(0)" onclick="alert(\'При выполнении команды произошла ошибка:\\nDurov is undefined\')">Вернуть стену</a>';
 		wallHeader+="</div>";
 	}
@@ -195,7 +195,7 @@ function __applyProfileChanges(){
 	}
 }
 
-function __applyFeedChanges(){
+function vkesApplyFeedChanges(){
 	var vtabs=ge("feed_rmenu");
 	var feedEl=ge("main_feed");
 	feedEl.parentNode.insertBefore(vtabs, feedEl.parentNode.children[0]);
