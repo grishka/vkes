@@ -1117,15 +1117,19 @@ body:not(.body_im) #page_layout {
 }*/
 
 /** IM **/
+body.body_im {
+	overflow-y: scroll
+}
+
 /* Search-bar */
 .im-page.im-page_classic .im-page--header {
-    width: 627px;
-    margin-top: 0;
-    top: 76px;
-    border-radius: 0;
+	width: 627px;
+	margin-top: 0;
+	top: 76px;
+	border-radius: 0;
 }
 .im-page.im-page_classic .im-page--header .ui_search_field {
-    padding: 10px 50px 10px 25px;
+	padding: 10px 50px 10px 25px;
 }
 
 /* Chat header */
@@ -1134,7 +1138,7 @@ body:not(.body_im) #page_layout {
 	background-color: transparent;
 	padding: 11px 0 1px !important;
 	overflow-x: hidden;
-	z-index: 10;
+	z-index: 1;
 	padding-top: 0;
 	overflow-y: visible;
 	width: 627px;
@@ -1146,6 +1150,7 @@ body:not(.body_im) #page_layout {
 .__vkes_tab_chat_list .im-right-menu.ui_rmenu {
 	padding: 11px 0 0 !important;
 	border-bottom: solid 1px #577CA5;
+	z-index: 0;
 }
 .im-page .im-page--dialogs {
 	padding: 72px 0;
@@ -1218,8 +1223,11 @@ body:not(.body_im) #page_layout {
 	white-space: nowrap;
 	border-radius: 2px;
 }
+.im-right-menu.ui-rmenu ._im_peer_tab:hover {
+	background-color: rgba(147,173,200,.2);
+}
 .im-right-menu.ui_rmenu .ui_rmenu_item_sel {
-	background-color: #597DA3;
+	background-color: #597DA3 !important;
 	color: #FFF;
 }
 .im-right-menu.ui_rmenu ._im_peer_tab.im-right-menu--unread {
@@ -1284,24 +1292,60 @@ body:not(.body_im) #page_layout {
 	margin: 10px 0;
 	padding: 5px 0;
 }
+.nim-dialog.nim-dialog_classic.nim-dialog_unread .nim-dialog--cw,
 .nim-dialog.nim-dialog_classic.nim-dialog_unread-out .nim-dialog--cw {
-    background-color: #f5f7fa;
-    padding: 5px 10px;
-    margin: 10px 0;
-    height: 51px;
+	background-color: #f5f7fa;
+	padding: 5px 10px;
+	margin: 10px 0;
+	height: 51px;
+}
+.nim-dialog.nim-dialog_classic.nim-dialog_unread .nim-dialog--cw {
+	padding: 5px 0;
 }
 .nim-dialog.nim-dialog_classic.nim-dialog_unread-out:hover .nim-dialog--cw {
 	background-color: rgba(147,173,200,.2);
 }
 .nim-dialog.nim-dialog_classic.nim-dialog_unread-out:not(.nim-dialog_failed) .nim-dialog--unread {
-    display: none;
+	display: none;
 }
 .nim-dialog.nim-dialog_classic .nim-dialog--close {
-    right: -5px;
-    top: -11px;
+	right: 13px;
+	top: -2px;
+}
+.nim-dialog:not(.nim-dialog_deleted):hover ._im_dialog_date {
+	display: none;
 }
 .im-page.im-page_classic .im-page--dialogs-footer {
-    padding: 12px 10px;
+	padding: 12px 10px;
+	width: 629px;
+	height: 36px;
+	margin-left: -1px;
+	border: 0 solid #D9E0E7;
+	border-width: 1px 1px 0;
+}
+.nim-dialog.nim-dialog_classic .nim-dialog--date {
+	top: 5px;
+}
+.nim-dialog.nim-dialog_classic .nim-dialog--unread {
+	bottom: 5px;
+}
+.nim-dialog .nim-dialog--unread {
+	height: 20px;
+	line-height: 20px;
+	min-width: 8px;
+}
+
+/* New dialog btn */
+.ui_search_custom_ctrl .tt_w.tt_black {
+	top: 36px !important;
+}
+.ui_search_custom_ctrl .tt_w.tt_black.tt_down:after {
+	border-bottom-color: rgba(0,0,0,.7);
+	border-top-color: transparent;
+	top: -10px;
+}
+
+/* Search in messages btn */
+.im-page.im-page_classic .im-page--mess-search {
     width: 627px;
-    height: 36px;
 }
