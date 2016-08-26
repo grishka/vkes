@@ -1112,15 +1112,19 @@ body:not(.body_im) #page_layout {
 }*/
 
 /** IM **/
+body.body_im {
+	overflow-y: scroll
+}
+
 /* Search-bar */
 .im-page.im-page_classic .im-page--header {
-    width: 627px;
-    margin-top: 0;
-    top: 76px;
-    border-radius: 0;
+	width: 627px;
+	margin-top: 0;
+	top: 76px;
+	border-radius: 0;
 }
 .im-page.im-page_classic .im-page--header .ui_search_field {
-    padding: 10px 50px 10px 25px;
+	padding: 10px 50px 10px 25px;
 }
 
 /* Chat header */
@@ -1281,37 +1285,40 @@ body:not(.body_im) #page_layout {
 }
 .nim-dialog.nim-dialog_classic.nim-dialog_unread .nim-dialog--cw,
 .nim-dialog.nim-dialog_classic.nim-dialog_unread-out .nim-dialog--cw {
-    background-color: #f5f7fa;
-    padding: 5px 10px;
-    margin: 10px 0;
-    height: 51px;
+	background-color: #f5f7fa;
+	padding: 5px 10px;
+	margin: 10px 0;
+	height: 51px;
 }
 .nim-dialog.nim-dialog_classic.nim-dialog_unread .nim-dialog--cw {
-    padding: 5px 0;
+	padding: 5px 0;
 }
 .nim-dialog.nim-dialog_classic.nim-dialog_unread-out:hover .nim-dialog--cw {
 	background-color: rgba(147,173,200,.2);
 }
 .nim-dialog.nim-dialog_classic.nim-dialog_unread-out:not(.nim-dialog_failed) .nim-dialog--unread {
-    display: none;
+	display: none;
 }
 .nim-dialog.nim-dialog_classic .nim-dialog--close {
-    right: -5px;
-    top: -11px;
+	right: -5px;
+	top: -11px;
 }
 .im-page.im-page_classic .im-page--dialogs-footer {
-    padding: 12px 10px;
-    width: 627px;
-    height: 36px;
+	padding: 12px 10px;
+	width: 629px;
+	height: 36px;
+	margin-left: -1px;
+	border: 0 solid #D9E0E7;
+	border-width: 1px 1px 0;
 }
 .nim-dialog.nim-dialog_classic .nim-dialog--date {
-    top: 5px;
+	top: 5px;
 }
 .nim-dialog.nim-dialog_classic .nim-dialog--unread {
-    bottom: 5px;
+	bottom: 5px;
 }
 .nim-dialog .nim-dialog--unread {
-    height: 20px;
-    line-height: 20px;
-    min-width: 8px;
+	height: 20px;
+	line-height: 20px;
+	min-width: 8px;
 }
