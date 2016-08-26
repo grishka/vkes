@@ -54,7 +54,7 @@ window.addEventListener('load', function() {
 
 function vkesOnAlDone(){
 	console.log("al done, module="+cur.module);
-	var wideModules=["apps", "app", "video", "im", "ads"];
+	var wideModules=["apps", "app", "video", "ads"];
 	if((!cur.module && (location.pathname.length<5 || location.pathname.substr(0, 5)!="/dev/")) || (cur.module && wideModules.indexOf(cur.module)==-1)){
 		ge("page_body").style.width="627px";
 		ge("page_layout").style.width="790px";
