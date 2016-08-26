@@ -124,13 +124,14 @@ body{
 .tu_date, .tickets_header_info, .help_table_question_act, .group_u_level, .group_edit_hint, .settings_blb_info, .groups_create_about,
 .bd_header_month, .bd_header_info, .bd_name a, .bd_info, .ui_search_fltr, .fave_notes_checkbox, small, .pv_cont .pv_comments_header,
 .pv_cont .pv_reply_form_wrap, .mv_playlist .mv_playlist_item, .im-typing, .page_doc_row, .ui_tabs.ui_tabs_box, .im-fwd .im-fwd--title,
-.box_msg, .settings_activity_history, .apps_access_item_info, .im-mess.im-mess_srv .im-mess--text, #pv_tag_info{
+.box_msg, .settings_activity_history, .apps_access_item_info, .im-mess.im-mess_srv .im-mess--text, #pv_tag_info, .im-member-item .im-member-iterm--status,
+.im-member-item .im-member-item--invite{
 	font-size: 11px;
 }
 
 .flat_button, .fakeinput, div[contenteditable=true], input.big_text, input.file, input.search, input.text, input[type=button], input[type=password],
 input[type=search], input[type=submit], input[type=text], input[type~=email], input[type~=password], input[type~=search], input[type~=text], textarea,
-.im-fwd .im-fwd--messages, .im-page .im-page--members, .im-page .im-page--peer-online{
+.im-fwd .im-fwd--messages, .im-page .im-page--members, .im-page .im-page--peer-online, .im-page-btn{
 	font-family: Tahoma;
 	font-size: 11px;
 }
@@ -497,7 +498,8 @@ span.fc_contact_photo.online.mobile:after{
 .nim-dialog.nim-dialog_classic .nim-dialog--photo .nim-peer .nim-peer--photo>img, .nim-peer .nim-peer--photo-w,
 .nim-peer .nim-peer--photo>img, .bp_img, .apps_feed_user_photo img, .settings_history_photo img, .search_item_img, .tickets_image__i,
 .tu_thumb, .group_u_photo_img, .settings_blb_photo_img, .bd_img, .bd_cell_img, .right_list_img, .fave_link_thumb, .ow_ava.ow_ava_comm,
-.payments_box_votes .payments_summary_phumb, .payments_transfer_to_photo{
+.payments_box_votes .payments_summary_phumb, .payments_transfer_to_photo, .im-member-item .im-member-item--photo img, .notify_tt_img, .notify_tt_thumb,
+.im-member-item .im-member-item--photo{
 	border-radius: 0 !important;
 }
 
@@ -541,6 +543,15 @@ span.fc_contact_photo.online.mobile:after{
 .audio_row.audio_row_current .audio_duration, .audio_row.audio_row_playing .audio_duration{
 	color: #FFF;
 	opacity: .5;
+}
+
+.wide_column .topics_module .module_body{
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.page_module_upload{
+	padding-left: 155px;
 }
 
 /*S htabs_as_old */
@@ -708,6 +719,12 @@ span.fc_contact_photo.online.mobile:after{
 
 #page_wall_posts{
 	padding-top: 10px;
+}
+
+.big_wall #page_wall_posts{
+	padding-top: 0;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 a.page_post_thumb_wrap, span.page_post_thumb_wrap{
@@ -1081,6 +1098,12 @@ body:not(.body_im) #page_layout {
 .fixed:not(#layer_wrap, #layer_bg) {
 	margin-top: -42px;
 }
+
+/*S im_tabs_on_top */
+
+/*._im_peer_tab{
+	display: inline-block;
+}*/
 
 /*S show_back_in_header */
 

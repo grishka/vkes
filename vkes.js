@@ -55,22 +55,25 @@ window.addEventListener('load', function() {
 function vkesOnAlDone(){
 	console.log("al done, module="+cur.module);
 	var wideModules=["apps", "app", "video", "im", "ads"];
-	if(!cur.module || wideModules.indexOf(cur.module)==-1){
+	if((!cur.module && (location.pathname.length<5 || location.pathname.substr(0, 5)!="/dev/")) || (cur.module && wideModules.indexOf(cur.module)==-1)){
 		ge("page_body").style.width="627px";
 		ge("page_layout").style.width="790px";
-			if(cur.module=="profile" || cur.module=="public" || cur.module=="groups"){
+		if(cur.module=="profile" || cur.module=="public" || cur.module=="groups"){
 			vkesApplyProfileChanges();
 		}
-			if(cur.module=="feed"){
+		if(cur.module=="feed"){
 			vkesApplyFeedChanges();
 		}
-			vkesResizeZhukovLayout();
+		if(cur.module=="im"){
+			vkesApplyMessagesChanges();
+		}
+		vkesResizeZhukovLayout();
 	}else if(cur.module!="app"){
 		if(parseInt(ge("page_layout").style.width)<960)
 			ge("page_body").style.width="795px";
 		ge("page_layout").style.width="960px";
 	}
-	var transformTabsModules=["settings", "groups_edit", "fave", "profileEdit"];
+	var transformTabsModules=["settings", "groups_edit", "fave", "profileEdit", "wall"];
 	if(transformTabsModules.indexOf(cur.module)!=-1 || location.pathname=="/settings" || location.pathname=="/edit")
 		vkesTransformRMenuIntoTabs();
 	var sidebarModules=["friends", "audio", "groups_list"];
@@ -260,6 +263,8 @@ function vkesApplyLeftMenuOrder(){
 	vkesInsertAfter(mwrap, apps, sep1);
 	if(ads)
 		vkesInsertAfter(mwrap, ads, docs ? docs : apps);
+
+	// .top_notify_tt
 }
 
 function vkesTransformRMenuIntoTabs(){
@@ -269,4 +274,9 @@ function vkesTransformRMenuIntoTabs(){
 	ge("narrow_column").style.display="none";
 	addClass(wcol, "wide_completely_expanded");
 	addClass(vtabs, "rmenu_transformed_into_tabs");
+}
+
+function vkesApplyMessagesChanges(){
+	var impage=ge("im--page");
+	impage.parentNode.appendChild(impage);
 }
