@@ -278,5 +278,51 @@ function vkesTransformRMenuIntoTabs(){
 
 function vkesApplyMessagesChanges(){
 	var impage=ge("im--page");
-	impage.parentNode.appendChild(impage);
+	var imwrap=impage.parentNode;
+	//impage.parentNode.appendChild(impage);
+	var peer=cur.peer;
+	delete cur.peer;
+	var updatePeer=function(val, force=false){
+			if(peer!=val || force){
+				if(val==0){
+					var classes=imwrap.className.split(" ");
+					var newClasses=[];
+					for(var i=0;i<classes.length;i++){
+						if(classes[i].length<6 || classes[i].substr(0, 6)!="__vkes")
+							newClasses.push(classes[i]);
+					}
+					newClasses.push("__vkes_tab_chat_list");
+					imwrap.className=newClasses.join(" ");
+				}else{
+					var classes=imwrap.className.split(" ");
+					var newClasses=[];
+					for(var i=0;i<classes.length;i++){
+						if(classes[i].length<6 || classes[i].substr(0, 6)!="__vkes")
+							newClasses.push(classes[i]);
+					}
+					newClasses.push("__vkes_tab_chat_view");
+					
+					if(val>0 && val<2000000000)
+						newClasses.push("__vkes_private_chat");
+					else if(val>2000000000)
+						newClasses.push("__vkes_multi_chat");
+					else if(val<0 && val>-2000000000)
+						newClasses.push("__vkes_community_chat");
+					else if(val<-2000000000)
+						newClasses.push("__vkes_email_chat");
+
+					imwrap.className=newClasses.join(" ");
+				}
+			}
+			peer=val;
+			//console.log("new peer "+peer);
+			return true;
+		};
+	Object.defineProperty(cur, "peer", {
+		get: function(){
+			return peer;
+		},
+		set: updatePeer, enumerable: true, configurable: true
+	});
+	updatePeer(peer, true);
 }
