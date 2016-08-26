@@ -39,7 +39,7 @@ if(vkesIsSettingEnabled("profiles_as_old")){
 	};
 }
 
-window.addEventListener('load', function() {
+//window.addEventListener('load', function() {
 	vkesOnPageLoaded();
 	setTimeout(function(){
 		vkesOnAlDone();
@@ -50,7 +50,7 @@ window.addEventListener('load', function() {
 		vkesOnAlDone();
 		return res;
 	};
-}, false);
+//}, false);
 
 function vkesOnAlDone(){
 	console.log("al done, module="+cur.module);
@@ -279,7 +279,7 @@ function vkesTransformRMenuIntoTabs(){
 function vkesApplyMessagesChanges(){
 	var impage=ge("im--page");
 	var imwrap=impage.parentNode;
-	//impage.parentNode.appendChild(impage);
+	//imwrap.appendChild(impage);
 	var peer=cur.peer;
 	delete cur.peer;
 	var updatePeer=function(val, force=false){
