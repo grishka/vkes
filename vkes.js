@@ -282,8 +282,13 @@ function vkesApplyMessagesChanges(){
 	//imwrap.appendChild(impage);
 	var peer=cur.peer;
 	delete cur.peer;
+	var prevChatMembers;
 	var updatePeer=function(val, force=false){
 			if(peer!=val || force){
+				if(prevChatMembers){
+					prevChatMembers.parentNode.removeChild(prevChatMembers);
+					prevChatMembers=null;
+				}
 				if(val==0){
 					var classes=imwrap.className.split(" ");
 					var newClasses=[];
@@ -312,6 +317,26 @@ function vkesApplyMessagesChanges(){
 						newClasses.push("__vkes_email_chat");
 
 					imwrap.className=newClasses.join(" ");
+
+					if(val>2000000000){
+						var interval;
+						interval=setInterval(function(){
+							var members=document.querySelector(".im-page--members");
+							var emoji=document.querySelector("._im_rcemoji");
+							if(members){
+								var memlink=document.createElement("a");
+								memlink.innerHTML=members.innerHTML;
+								memlink.className="__vkes_chat_members_link";
+								memlink.onclick=function(ev){
+									// I hate JS already
+									members.click();
+								};
+								prevChatMembers=memlink;
+								clearInterval(interval);
+								vkesInsertAfter(emoji.parentNode, memlink, emoji);
+							}
+						}, 10);
+					}
 				}
 			}
 			peer=val;
