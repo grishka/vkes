@@ -1336,3 +1336,8 @@ body.body_im {
 	border-top-color: transparent;
 	top: -10px;
 }
+
+/* Search in messages btn */
+.im-page.im-page_classic .im-page--mess-search {
+    width: 627px;
+}
