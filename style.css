@@ -1279,11 +1279,15 @@ body:not(.body_im) #page_layout {
 	margin: 10px 0;
 	padding: 5px 0;
 }
+.nim-dialog.nim-dialog_classic.nim-dialog_unread .nim-dialog--cw,
 .nim-dialog.nim-dialog_classic.nim-dialog_unread-out .nim-dialog--cw {
     background-color: #f5f7fa;
     padding: 5px 10px;
     margin: 10px 0;
     height: 51px;
+}
+.nim-dialog.nim-dialog_classic.nim-dialog_unread .nim-dialog--cw {
+    padding: 5px 0;
 }
 .nim-dialog.nim-dialog_classic.nim-dialog_unread-out:hover .nim-dialog--cw {
 	background-color: rgba(147,173,200,.2);
@@ -1299,4 +1303,15 @@ body:not(.body_im) #page_layout {
     padding: 12px 10px;
     width: 627px;
     height: 36px;
+}
+.nim-dialog.nim-dialog_classic .nim-dialog--date {
+    top: 5px;
+}
+.nim-dialog.nim-dialog_classic .nim-dialog--unread {
+    bottom: 5px;
+}
+.nim-dialog .nim-dialog--unread {
+    height: 20px;
+    line-height: 20px;
+    min-width: 8px;
 }
