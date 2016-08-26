@@ -24,7 +24,7 @@
     color: #36638e;
     background: none;
     margin: 0 20px;
-}
+}я
 
 .page_block_header_count{
 	color: #36638e;
@@ -1133,7 +1133,7 @@ body.body_im {
 	background-color: transparent;
 	padding: 11px 0 1px !important;
 	overflow-x: hidden;
-	z-index: 10;
+	z-index: 1;
 	padding-top: 0;
 	overflow-y: visible;
 	width: 627px;
@@ -1145,6 +1145,7 @@ body.body_im {
 .__vkes_tab_chat_list .im-right-menu.ui_rmenu {
 	padding: 11px 0 0 !important;
 	border-bottom: solid 1px #577CA5;
+	z-index: 0;
 }
 .im-page .im-page--dialogs {
 	padding: 72px 0;
@@ -1324,4 +1325,14 @@ body.body_im {
 	height: 20px;
 	line-height: 20px;
 	min-width: 8px;
+}
+
+/* New dialog btn */
+.ui_search_custom_ctrl .tt_w.tt_black {
+	top: 36px !important;
+}
+.ui_search_custom_ctrl .tt_w.tt_black.tt_down:after {
+	border-bottom-color: rgba(0,0,0,.7);
+	border-top-color: transparent;
+	top: -10px;
 }
