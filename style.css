@@ -1121,26 +1121,26 @@ body:not(.body_im) #page_layout {
 }
 
 /* Chat header */
-.im-right-menu {
-    position: relative;
-    float: none;
-    background-color: transparent;
-    width: 795px;
-    margin: 0;
-    padding: 11px 0 1px;
-    top: 46px;
-    overflow-x: hidden;
-    z-index: 10;
-    padding-top: 0;
-    overflow-y: visible;
+.im-right-menu.ui_rmenu {
+	position: relative;
+	float: none;
+	background-color: transparent;
+	width: 795px;
+	margin: 0;
+	padding: 11px 0 1px;
+	top: 46px;
+	overflow-x: hidden;
+	z-index: 10;
+	padding-top: 0;
+	overflow-y: visible;
 }
-.im-page_history-show + .im-right-menu {
-    position: fixed;
+.im-page_history-show + .im-right-menu.ui_rmenu {
+	position: fixed;
 	top: 42px;
 	left: 50%;
 	margin-left: -317px;
 }
-.im-page_history-show + .im-right-menu:before {
+.im-page_history-show + .im-right-menu.ui_rmenu:before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -1151,9 +1151,9 @@ body:not(.body_im) #page_layout {
 	z-index: 0;
 	height: 33px;
 }
-.im-page_history-show + .im-right-menu #ui_rmenu_all,
-.im-page_history-show + .im-right-menu #ui_rmenu_unread,
-.im-page_history-show + .im-right-menu #ui_rmenu_fav {
+.im-page_history-show + .im-right-menu.ui_rmenu #ui_rmenu_all,
+.im-page_history-show + .im-right-menu.ui_rmenu #ui_rmenu_unread,
+.im-page_history-show + .im-right-menu.ui_rmenu #ui_rmenu_fav {
 	float: left;
 	position: relative;
 	z-index: 2;
@@ -1163,15 +1163,15 @@ body:not(.body_im) #page_layout {
 	line-height: 22px;
 	margin: 0;
 }
-.im-page_history-show + .im-right-menu #ui_rmenu_all {
+.im-page_history-show + .im-right-menu.ui_rmenu #ui_rmenu_all {
 	margin-left: 10px;
 }
-.im-page_history-show + .im-right-menu #ui_rmenu_fav {
+.im-page_history-show + .im-right-menu.ui_rmenu #ui_rmenu_fav {
 	margin-right: 10px;
 }
 
 /* Peers tabs */
-.im-page_history-show + .im-right-menu ._im_ui_peers_list {
+.im-page_history-show + .im-right-menu.ui_rmenu ._im_ui_peers_list {
 	display: block;
 	clear: both;
 	padding: 13px 10px 8px 10px;
@@ -1180,17 +1180,17 @@ body:not(.body_im) #page_layout {
 	background: #f7f7f7;
 	box-shadow: none;
 }
-.im-page_history-show + .im-right-menu ._im_ui_peers_list:before,
-.im-page_history-show + .im-right-menu ._im_ui_peers_list:after {
+.im-page_history-show + .im-right-menu.ui_rmenu ._im_ui_peers_list:before,
+.im-page_history-show + .im-right-menu.ui_rmenu ._im_ui_peers_list:after {
 	content: "";
 	display: block;
 	clear: both;
 }
-.im-page_history-show + .im-right-menu .ui_rmenu_sep {
+.im-page_history-show + .im-right-menu.ui_rmenu .ui_rmenu_sep {
 	display: none;
 }
-.im-page_history-show + .im-right-menu .ui_rmenu_item_sel,
-.im-page_history-show + .im-right-menu ._im_peer_tab {
+.im-page_history-show + .im-right-menu.ui_rmenu .ui_rmenu_item_sel,
+.im-page_history-show + .im-right-menu.ui_rmenu ._im_peer_tab {
 	float: left;
 	padding: 0 7px;
 	line-height: 20px;
@@ -1203,21 +1203,21 @@ body:not(.body_im) #page_layout {
 	white-space: nowrap;
 	border-radius: 2px;
 }
-.im-page_history-show + .im-right-menu .ui_rmenu_item_sel {
+.im-page_history-show + .im-right-menu.ui_rmenu .ui_rmenu_item_sel {
 	background-color: #597DA3;
 	color: #FFF;
 }
-.im-page_history-show + .im-right-menu ._im_peer_tab.im-right-menu--unread {
+.im-page_history-show + .im-right-menu.ui_rmenu ._im_peer_tab.im-right-menu--unread {
 	background-color: #EAEAEA;
 }
-.im-page_history-show + .im-right-menu .im-right-menu--unread .im-right-menu--text {
+.im-page_history-show + .im-right-menu.ui_rmenu .im-right-menu--unread .im-right-menu--text {
 	font-weight: 600;
 	float: left;
 }
-.im-page_history-show + .im-right-menu .im-right-menu--unread:hover .ui_rmenu_count.im-right-menu--count {
+.im-page_history-show + .im-right-menu.ui_rmenu .im-right-menu--unread:hover .ui_rmenu_count.im-right-menu--count {
 	display: inline-block;
 }
-.im-page_history-show + .im-right-menu .ui_rmenu_count.im-right-menu--count._im_r_ct {
+.im-page_history-show + .im-right-menu.ui_rmenu .ui_rmenu_count.im-right-menu--count._im_r_ct {
 	margin: 0;
 	line-height: 20px;
 	font-size: 10px;
@@ -1227,13 +1227,13 @@ body:not(.body_im) #page_layout {
 }
 
 /* Close btn */
-.im-page_history-show + .im-right-menu .im-right-menu--close {
+.im-page_history-show + .im-right-menu.ui_rmenu .im-right-menu--close {
 	display: block;
 	margin: 0 -3px 0 1px;
 	width: 17px;
 	height: 20px;
 }
-.im-page_history-show + .im-right-menu .im-right-menu--close:before {
+.im-page_history-show + .im-right-menu.ui_rmenu .im-right-menu--close:before {
 	top: 3px;
 	right: 0;
 }
