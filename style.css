@@ -1222,7 +1222,7 @@ body.body_im {
 	background-color: rgba(147,173,200,.2);
 }
 .im-right-menu.ui_rmenu .ui_rmenu_item_sel {
-	background-color: #597DA3;
+	background-color: #597DA3 !important;
 	color: #FFF;
 }
 .im-right-menu.ui_rmenu ._im_peer_tab.im-right-menu--unread {
