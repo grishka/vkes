@@ -1300,8 +1300,11 @@ body.body_im {
 	display: none;
 }
 .nim-dialog.nim-dialog_classic .nim-dialog--close {
-	right: -5px;
-	top: -11px;
+	right: 13px;
+	top: -2px;
+}
+.nim-dialog:not(.nim-dialog_deleted):hover ._im_dialog_date {
+	display: none;
 }
 .im-page.im-page_classic .im-page--dialogs-footer {
 	padding: 12px 10px;
