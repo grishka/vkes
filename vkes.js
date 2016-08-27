@@ -277,19 +277,77 @@ function vkesTransformRMenuIntoTabs(){
 }
 
 function vkesApplyMessagesChanges(){
+	var topTabs=document.createElement("ul");
+	topTabs.className="ui_tabs";
+	topTabs.style.height="21px";
+	topTabs.style.backgroundColor="#FFF";
+	var chatListTab=document.createElement("li");
+	chatListTab.className="ui_tab";
+	chatListTab.innerHTML="Диалоги";
+	topTabs.appendChild(chatListTab);
+	var chatViewTab=document.createElement("li");
+	chatViewTab.className="ui_tab";
+	chatViewTab.innerHTML="Просмотр диалогов";
+	topTabs.appendChild(chatViewTab);
+
+	var topTabsActionsList=document.createElement("span");
+	topTabsActionsList.className="fl_r";
+	topTabsActionsList.innerHTML='<a href="javascript:void(0);" id="vkes_im_unread">Непрочитанные</a> | <a href="javascript:void(0);" id="vkes_im_fave">Важные</a>';
+	topTabs.appendChild(topTabsActionsList);
+
+	var topTabsActionsChat=document.createElement("span");
+	topTabsActionsChat.className="fl_r";
+	topTabsActionsChat.innerHTML='<a href="javascript:void(0);" id="vkes_im_actions">Действия</a>';
+	//topTabs.appendChild(topTabsActionsChat);
+
+	var cont=document.querySelector(".ui_rmenu");
+	cont.insertBefore(topTabs, cont.children[0]);
+	var lastPeerTab, lastListTab;
+
+	if(document.querySelectorAll("._im_ui_peers_list>a").length==0)
+		hide(chatViewTab);
+
+	chatListTab.onclick=function(){
+		ge("ui_rmenu_all").click();
+	};
+	chatViewTab.onclick=function(){
+		(lastPeerTab ? lastPeerTab : document.querySelectorAll("._im_ui_peers_list>a")[0]).click();
+	};
+
+	ge("vkes_im_fave").onclick=function(){
+		ge("ui_rmenu_fav").click();
+	};
+	ge("vkes_im_unread").onclick=function(){
+		var showUnread=!hasClass("ui_rmenu_unread", "ui_rmenu_item_sel");
+		(showUnread ? ge("ui_rmenu_unread") : ge("ui_rmenu_all")).click();
+		ge("vkes_im_unread").innerHTML=showUnread ? "Все сообщения" : "Непрочитанные";
+	};
+
+
 	var impage=ge("im--page");
 	var imwrap=impage.parentNode;
 	//imwrap.appendChild(impage);
 	var peer=cur.peer;
 	delete cur.peer;
 	var prevChatMembers;
+	var prevMenu;
 	var updatePeer=function(val, force=false){
 			if(peer!=val || force){
 				if(prevChatMembers){
 					prevChatMembers.parentNode.removeChild(prevChatMembers);
 					prevChatMembers=null;
 				}
+				if(prevMenu){
+					prevMenu.parentNode.removeChild(prevMenu);
+					prevMenu=null;
+				}
 				if(val==0){
+					addClass(chatListTab, "ui_tab_sel");
+					removeClass(chatViewTab, "ui_tab_sel");
+					if(document.querySelectorAll("._im_ui_peers_list>a").length==0)
+						hide(chatViewTab);
+					show(topTabsActionsList);
+					hide(topTabsActionsChat);
 					var classes=imwrap.className.split(" ");
 					var newClasses=[];
 					for(var i=0;i<classes.length;i++){
@@ -299,6 +357,12 @@ function vkesApplyMessagesChanges(){
 					newClasses.push("__vkes_tab_chat_list");
 					imwrap.className=newClasses.join(" ");
 				}else{
+					lastPeerTab=ge("ui_rmenu_peer_"+val);
+					removeClass(chatListTab, "ui_tab_sel");
+					addClass(chatViewTab, "ui_tab_sel");
+					show(chatViewTab);
+					show(topTabsActionsChat);
+					hide(topTabsActionsList);
 					var classes=imwrap.className.split(" ");
 					var newClasses=[];
 					for(var i=0;i<classes.length;i++){
@@ -318,25 +382,48 @@ function vkesApplyMessagesChanges(){
 
 					imwrap.className=newClasses.join(" ");
 
-					if(val>2000000000){
-						var interval;
-						interval=setInterval(function(){
+					
+					var interval;
+					interval=setInterval(function(){
+						var menu=document.querySelector(".im-page--header-more>div");
+						if(menu){
+							var cmenu=menu.cloneNode(true);
+							topTabs.appendChild(cmenu);
+							cmenu.onclick=function(ev){
+								//console.log(ev.srcElement.className);
+								var el=document.querySelector(".im-page--header-more ."+ev.srcElement.className.split(" ").join("."));
+								//console.log(el);
+								if(el)
+									el.click();
+							};
+							var btn=cmenu.querySelector(".ui_actions_menu_icons");
+							var replacement=document.createElement("a");
+							replacement.className="fl_r";
+							replacement.onclick=function(ev){
+								uiActionsMenu.keyToggle(this, ev);
+							};
+							replacement.innerHTML=btn.getAttribute("aria-label");
+							btn.parentNode.replaceChild(replacement, btn);
+							prevMenu=cmenu;
+							clearInterval(interval);
+							console.log("here");
+						}else{
+							return;
+						}
+						if(val>2000000000){
 							var members=document.querySelector(".im-page--members");
 							var emoji=document.querySelector("._im_rcemoji");
-							if(members){
-								var memlink=document.createElement("a");
-								memlink.innerHTML=members.innerHTML;
-								memlink.className="__vkes_chat_members_link";
-								memlink.onclick=function(ev){
-									// I hate JS already
-									members.click();
-								};
-								prevChatMembers=memlink;
-								clearInterval(interval);
-								vkesInsertAfter(emoji.parentNode, memlink, emoji);
-							}
-						}, 10);
-					}
+							var memlink=document.createElement("a");
+							memlink.innerHTML=members.innerHTML;
+							memlink.className="__vkes_chat_members_link";
+							memlink.onclick=function(ev){
+								// I hate JS already
+								members.click();
+							};
+							prevChatMembers=memlink;
+							vkesInsertAfter(emoji.parentNode, memlink, emoji);
+						}
+					}, 10);
 				}
 			}
 			peer=val;

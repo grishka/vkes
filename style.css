@@ -1125,7 +1125,7 @@ body.body_im {
 .im-page.im-page_classic .im-page--header {
 	width: 627px;
 	margin-top: 0;
-	top: 76px;
+	top: 77px;
 	border-radius: 0;
 }
 .im-page.im-page_classic .im-page--header .ui_search_field {
@@ -1136,53 +1136,27 @@ body.body_im {
 .im-right-menu.ui_rmenu {
 	float: none;
 	background-color: transparent;
-	padding: 11px 0 1px !important;
-	overflow-x: hidden;
+	padding: 0 0 1px !important;
 	z-index: 1;
 	padding-top: 0;
-	overflow-y: visible;
 	width: 627px;
 	position: fixed;
 	top: 42px;
 	left: 50%;
 	margin-left: -234px;
 }
-.__vkes_tab_chat_list .im-right-menu.ui_rmenu {
-	padding: 11px 0 0 !important;
-	border-bottom: solid 1px #577CA5;
-	z-index: 0;
-}
+
 .im-page .im-page--dialogs {
 	padding: 72px 0;
 }
-.im-right-menu.ui_rmenu:before {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	background-color: #FFF;
-	z-index: 0;
-	height: 33px;
-}
 .im-right-menu.ui_rmenu #ui_rmenu_all,
 .im-right-menu.ui_rmenu #ui_rmenu_unread,
-.im-right-menu.ui_rmenu #ui_rmenu_fav {
-	float: left;
-	position: relative;
-	z-index: 2;
-	padding: 0 10px;
-	border-radius: 3px 3px 0 0;
-	height: 22px;
-	line-height: 22px;
-	margin: 0;
+.im-right-menu.ui_rmenu #ui_rmenu_fav{
+	display: none;
 }
-.im-right-menu.ui_rmenu #ui_rmenu_all {
-	margin-left: 10px;
-}
-.im-right-menu.ui_rmenu #ui_rmenu_fav {
-	margin-right: 10px;
+
+.im-page-wrapper .ui_actions_menu{
+	z-index: 999;
 }
 
 /* Peers tabs */
@@ -1192,7 +1166,6 @@ body.body_im {
 	position: relative;
 	z-index: 10;
 	padding: 13px 10px 8px 10px;
-	border-top: solid 1px #577CA5;
 	border-bottom: solid 1px #cad1d7;
 	background: #f7f7f7;
 	box-shadow: none;
