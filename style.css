@@ -1239,9 +1239,9 @@ body.body_im {
 	width: 100%;
 	border-right: 0;
 }
-.im-page--header-chat {
+/*.im-page--header-chat {
 	display: none;
-}
+}*/
 .im-page.im-page_classic .im-page--chat-input {
 	width: 627px;
 	border-right-width: 1px;
@@ -1321,4 +1321,39 @@ body.body_im {
 /* Search in messages btn */
 .im-page.im-page_classic .im-page--mess-search {
     width: 627px;
+}
+
+.im-page--header-chat{
+	padding-top: 36px;
+	display: none;
+}
+
+.im-page--hisory_search-open .im-page--header-chat{ /* the typo is here on purpose */
+	display: block !important;
+}
+
+.im-page.im-page_classic .im-page--header-chat{
+	width: 629px;
+	border: none;
+}
+
+.im-page.im-page_classic .im-page--header-inner{
+	box-shadow: none;
+	border-radius: 0;
+	background: #f7f7f7;
+	margin-left: 1px;
+	margin-right: 1px;
+	border-bottom: solid 1px #cad1d7;
+}
+
+.im-page.im-page_classic .im-page--peer {
+    max-width: 235px !important;
+}
+
+.im-page .im-page--header, .im-page .im-page--search-header{
+	position: relative;
+}
+
+.im-page--top-date-bar-wrap{
+	display: none;
 }

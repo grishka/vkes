@@ -331,8 +331,28 @@ function vkesApplyMessagesChanges(){
 	delete cur.peer;
 	var prevChatMembers;
 	var prevMenu;
+	var peerTabs=document.querySelector("._im_ui_peers_list");
+	var observer=new MutationObserver(function(ev){
+								console.log(ev);
+								for(var i=0;i<ev.length;i++){
+									var m=ev[i];
+									if(m.type=="attributes" && m.attributeName=="class"){
+										var topbar=document.querySelector(".im-page--header-chat");
+										if(m.target.className.split(" ").indexOf("im-page--mess-actions_visible")!=-1){
+											console.log("entered sel mode");
+											show(topbar);
+											hide(peerTabs);
+										}else{
+											console.log("exited sel mode");
+											hide(topbar);
+											show(peerTabs);
+										}
+									}
+								}
+							});
 	var updatePeer=function(val, force=false){
 			if(peer!=val || force){
+				observer.disconnect();
 				if(prevChatMembers){
 					prevChatMembers.parentNode.removeChild(prevChatMembers);
 					prevChatMembers=null;
@@ -386,7 +406,7 @@ function vkesApplyMessagesChanges(){
 					var interval;
 					interval=setInterval(function(){
 						var menu=document.querySelector(".im-page--header-more>div");
-						if(menu){
+						if(menu && (val<2000000000 || document.querySelector(".im-page--members"))){
 							var cmenu=menu.cloneNode(true);
 							topTabs.appendChild(cmenu);
 							cmenu.onclick=function(ev){
@@ -405,8 +425,10 @@ function vkesApplyMessagesChanges(){
 							replacement.innerHTML=btn.getAttribute("aria-label");
 							btn.parentNode.replaceChild(replacement, btn);
 							prevMenu=cmenu;
+
+							observer.observe(document.querySelector(".im-page--mess-actions"), {attributes: true});
+
 							clearInterval(interval);
-							console.log("here");
 						}else{
 							return;
 						}
