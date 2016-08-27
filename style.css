@@ -1118,7 +1118,7 @@ body:not(.body_im) #page_layout {
 
 /** IM **/
 body.body_im {
-	overflow-y: scroll
+	overflow-y: scroll !important;
 }
 
 /* Search-bar */
@@ -1223,7 +1223,7 @@ body.body_im {
 	white-space: nowrap;
 	border-radius: 2px;
 }
-.im-right-menu.ui-rmenu ._im_peer_tab:hover {
+.im-right-menu.ui_rmenu ._im_peer_tab:hover {
 	background-color: rgba(147,173,200,.2);
 }
 .im-right-menu.ui_rmenu .ui_rmenu_item_sel {
