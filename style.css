@@ -1365,7 +1365,28 @@ body.body_im {
 }
 
 
-/* Community fixed post */
+/* Community fixed post + info */
+#page_body {
+    box-sizing: border-box;
+    padding: 10px 10px 0;
+}
+.wide_column_left .narrow_column_wrap {
+    width: 200px;
+}
+.pad_wide_column_right .wide_column,
+.pad_wide_column_left .narrow_column {
+	padding: 0 0 10px 0 !important;
+}
+.pad_wide_column_right .narrow_column,
+.pad_wide_column_left .wide_column {
+    padding: 0 0 10px 0 !important;
+}
+.wide_column .page_top {
+    font-size: 11px !important;
+    background: #fff;
+    padding: 0 6px 4px;
+    margin: 0;
+}
 .page_info_wrap .wall_fixed {
     margin: 10px 0 0 !important;
 }
@@ -1378,7 +1399,61 @@ body.body_im {
 }
 .wide_column .page_top+.page_block_h2 .ui_tabs.page_info_tabs {
     overflow: hidden;
+    padding: 0 6px;
 }
-.page_info_wrap.info .group_info_block.info, .page_info_wrap.wiki .group_info_block.wiki {
-    padding: 10px 0 0;
+.page_info_wrap.info .group_info_block.info,
+.page_info_wrap.wiki .group_info_block.wiki {
+    padding: 7px 6px 10px;
+}
+.group_info_row:before {
+    content: attr(title)":";
+    width: 120px;
+    color: #777;
+    padding: 0;
+    background: none;
+    line-height: 150%;
+    padding: 0 !important;
+    font-size: 11px;
+    margin: 0 0 0 -120px !important;
+}
+.group_info_row {
+    padding-left: 120px;
+}
+
+/* Community group friends */
+.module_header .header_top,
+.wide_column .module_header .header_top {
+    line-height: 21px !important;
+    height: 21px !important;
+    padding: 0 8px;
+}
+.module_header .header_top .right_link,
+.header_right_link,
+.wide_column .header_right_link {
+	line-height: 21px;
+	height: 21px;
+}
+.module_header {
+    height: 21px;
+}
+.group_friends {
+    font-size: 11px;
+    padding: 0 !important;
+}
+.group_friends_images {
+    display: none;
+}
+.group_friends_text {
+    line-height: 13px;
+    border-bottom: 1px solid #f1f1f1;
+    color: #666;
+    padding: 3px 8px;
+    background: #f1f1f1;
+    margin-bottom: -20px;
+    top: 21px;
+    position: relative;
+    z-index: 2;
+}
+.group_friends + .page_block .module_body {
+    padding-top: 26px;
 }
