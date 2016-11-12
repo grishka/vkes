@@ -125,7 +125,8 @@ body{
 .bd_header_month, .bd_header_info, .bd_name a, .bd_info, .ui_search_fltr, .fave_notes_checkbox, small, .pv_cont .pv_comments_header,
 .pv_cont .pv_reply_form_wrap, .mv_playlist .mv_playlist_item, .im-typing, .page_doc_row, .ui_tabs.ui_tabs_box, .im-fwd .im-fwd--title,
 .box_msg, .settings_activity_history, .apps_access_item_info, .im-mess.im-mess_srv .im-mess--text, #pv_tag_info, .im-member-item .im-member-iterm--status,
-.im-member-item .im-member-item--invite{
+.im-member-item .im-member-item--invite, .page_media_place_label_inline, .fans_idol_row, .button_blue button, .button_gray button, .button_light_gray button,
+.top_notify_cont{
 	font-size: 11px;
 }
 
@@ -499,7 +500,7 @@ span.fc_contact_photo.online.mobile:after{
 .nim-peer .nim-peer--photo>img, .bp_img, .apps_feed_user_photo img, .settings_history_photo img, .search_item_img, .tickets_image__i,
 .tu_thumb, .group_u_photo_img, .settings_blb_photo_img, .bd_img, .bd_cell_img, .right_list_img, .fave_link_thumb, .ow_ava.ow_ava_comm,
 .payments_box_votes .payments_summary_phumb, .payments_transfer_to_photo, .im-member-item .im-member-item--photo img, .notify_tt_img, .notify_tt_thumb,
-.im-member-item .im-member-item--photo{
+.im-member-item .im-member-item--photo, .fans_idolph_wrap, .feedback_sticky_img{
 	border-radius: 0 !important;
 }
 
@@ -1124,6 +1125,7 @@ body.body_im {
 /* Search-bar */
 .im-page.im-page_classic .im-page--header {
 	width: 627px;
+	max-width: 627px;
 	margin-top: 0;
 	top: 77px;
 	border-radius: 0;
@@ -1140,6 +1142,7 @@ body.body_im {
 	z-index: 2;
 	padding-top: 0;
 	width: 627px;
+	max-width: 627px;
 	position: fixed;
 	top: 42px;
 	left: 50%;
@@ -1291,6 +1294,7 @@ body.body_im {
 .im-page.im-page_classic .im-page--dialogs-footer {
 	padding: 12px 10px;
 	width: 629px;
+	max-width: 629px;
 	height: 36px;
 	margin-left: -1px;
 	border: 0 solid #D9E0E7;
@@ -1321,6 +1325,7 @@ body.body_im {
 /* Search in messages btn */
 .im-page.im-page_classic .im-page--mess-search {
     width: 627px;
+    max-width: 627px;
 }
 
 .im-page--header-chat{
@@ -1334,6 +1339,7 @@ body.body_im {
 
 .im-page.im-page_classic .im-page--header-chat{
 	width: 629px;
+	max-width: 629px;
 	border: none;
 }
 
