@@ -1363,3 +1363,22 @@ body.body_im {
 .im-page--top-date-bar-wrap{
 	display: none;
 }
+
+
+/* Community fixed post */
+.page_info_wrap .wall_fixed {
+    margin: 10px 0 0 !important;
+}
+.page_post_sized_thumbs {
+    max-width: 100% !important;
+    overflow: hidden;
+}
+.wide_column .page_top+.page_block_h2 {
+    padding: 10px 0 0 !important;
+}
+.wide_column .page_top+.page_block_h2 .ui_tabs.page_info_tabs {
+    overflow: hidden;
+}
+.page_info_wrap.info .group_info_block.info, .page_info_wrap.wiki .group_info_block.wiki {
+    padding: 10px 0 0;
+}
