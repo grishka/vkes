@@ -222,7 +222,7 @@ function vkesInsertAfter(parent, node, after){
 
 function vkesApplyLeftMenuOrder(){
 	// profile friends photo video audio messages groups news feedback fave settings | apps docs ads | userapps
-	var mwrap=ge("side_bar_inner").children[0];
+	var mwrap=ge("side_bar_inner").children[0].children[0];
 	var profile=ge("l_pr");
 	var news=ge("l_nwsf");
 	var messages=ge("l_msg");
@@ -324,7 +324,7 @@ function vkesApplyMessagesChanges(){
 	};
 
 
-	var impage=ge("im--page");
+	var impage=document.querySelector(".im-page");
 	var imwrap=impage.parentNode;
 	//imwrap.appendChild(impage);
 	var peer=cur.peer;
@@ -332,6 +332,7 @@ function vkesApplyMessagesChanges(){
 	var prevChatMembers;
 	var prevMenu;
 	var peerTabs=document.querySelector("._im_ui_peers_list");
+	var didUpdateInputForm=false;
 	var observer=new MutationObserver(function(ev){
 								console.log(ev);
 								for(var i=0;i<ev.length;i++){
@@ -350,6 +351,7 @@ function vkesApplyMessagesChanges(){
 									}
 								}
 							});
+	var rightAva;
 	var updatePeer=function(val, force=false){
 			if(peer!=val || force){
 				observer.disconnect();
@@ -433,7 +435,7 @@ function vkesApplyMessagesChanges(){
 							return;
 						}
 						if(val>2000000000){
-							var members=document.querySelector(".im-page--members");
+							/*var members=document.querySelector(".im-page--members");
 							var emoji=document.querySelector("._im_rcemoji");
 							var memlink=document.createElement("a");
 							memlink.innerHTML=members.innerHTML;
@@ -443,8 +445,30 @@ function vkesApplyMessagesChanges(){
 								members.click();
 							};
 							prevChatMembers=memlink;
-							vkesInsertAfter(emoji.parentNode, memlink, emoji);
+							vkesInsertAfter(emoji.parentNode, memlink, emoji);*/
+							var memlink=document.querySelector(".im-page--members");
 						}
+						if(!didUpdateInputForm){
+							didUpdateInputForm=true;
+							//var chatHeader=document.querySelector(".im-page--chat-header");
+							var txtarea=document.querySelector(".im-chat-input--textarea");
+							//txtarea.insertBefore(chatHeader, txtarea.firstChild);
+							var inputForm=document.querySelector(".im-chat-input");
+							var inputFormPanel=document.createElement("div");
+							inputFormPanel.className="__vkes_chat_input_panel";
+							txtarea.appendChild(inputFormPanel);
+							var leftAva=document.createElement("img");
+							leftAva.src=document.querySelector(".top_profile_img").src;
+							leftAva.className="__vkes_chat_panel_ava __vkes_chat_left_ava";
+							rightAva=document.createElement("div");
+							rightAva.className="__vkes_chat_panel_ava __vkes_chat_right_ava";
+							txtarea.appendChild(leftAva);
+							txtarea.appendChild(rightAva);
+							var attachBtn=document.querySelector(".im-chat-input--selector");
+							inputFormPanel.appendChild(attachBtn);
+							document.querySelector(".ms_item_more").innerHTML="Прикрепить";
+						}
+						rightAva.innerHTML=document.querySelector(".im-page--aside-photo").innerHTML;
 					}, 10);
 				}
 			}

@@ -914,7 +914,7 @@ a.page_post_thumb_wrap, span.page_post_thumb_wrap{
 .im-chat-input .im-chat-input--text{
 	border: solid 1px #c0cad5;
 	border-radius: 2px;
-	padding-left: 6px;
+	padding: 0 6px 0 0;
 	min-height: 46px;
 }
 
@@ -955,6 +955,26 @@ a.page_post_thumb_wrap, span.page_post_thumb_wrap{
 .__vkes_chat_members_link{
 	margin-left: 10px;
 	line-height: 30px;
+}
+
+.im-page_classic.im-page .im-chat-history-resize{
+	background: transparent;
+}
+
+.im-page_classic.im-page .im-mess:not(.im-mess_fwd).im-mess_unread{
+	margin-left: 80px;
+}
+
+.im-page_classic.im-page .im-mess-stack:not(.im-mess-stack_fwd)>.im-mess-stack--photo{
+	left: 85px;
+}
+
+.im-page_classic.im-page .im-mess-stack--content .im-mess-stack--pname{
+	left: 132px;
+}
+
+.im-page_classic.im-page .im-mess:not(.im-mess_fwd)>.im-mess--text, .im-page_classic.im-page .im-mess:not(.im-mess_fwd).im-mess_unread.im-mess_selected>.im-mess--text{
+	margin-left: 130px;
 }
 
 /*S photoviewer */
@@ -1250,13 +1270,67 @@ body.body_im {
 	border-right-width: 1px;
 }
 .im-chat-input.im-chat-input_classic .im-chat-input--textarea {
-	width: 455px;
+	width: 360px;
+	margin: 0 7px 0 105px;
 }
 .im-page.im-page_classic .im-mess:not(.im-mess_fwd) {
 	max-width: 100%;
 }
 .im-page.im-page_classic .im-mess-stack {
 	max-width: 100%;
+}
+.im-chat-input .im-chat-input--txt-wrap{
+	border: none;
+}
+
+.im-page_classic .im-page--chat-header{
+	/*bottom: 20px;
+	top: unset;
+	position: static;*/
+	opacity: .5;
+}
+
+.__vkes_chat_panel_ava{
+	position: absolute;
+	top: 0;
+	width: 50px;
+	height: 50px;
+	border-radius: 3px;
+}
+
+.__vkes_chat_left_ava{
+	left: -60px;
+}
+
+.__vkes_chat_right_ava{
+	right: -60px;
+}
+
+.im-chat-input .im-chat-input--selector{
+	position: static;
+	top: unset;
+	left: unset;
+}
+
+.im-chat-input .im-chat-input--selector .ms_item_more{
+	padding: 0;
+}
+
+.__vkes_chat_input_panel{
+	padding-bottom: 10px;
+	height: 26px;
+}
+
+.__vkes_chat_panel_ava .nim-peer.nim-peer_smaller, .__vkes_chat_panel_ava .nim-peer.nim-peer_smaller .nim-peer--photo .im_grid>img, .__vkes_chat_panel_ava .nim-peer.nim-peer_smaller .nim-peer--photo>img{
+	width: 50px;
+	height: 50px;
+}
+
+.__vkes_chat_panel_ava .nim-peer.nim-peer_smaller .im_grid>.dialogs_inline_chatter{
+	width: 23px;
+    height: 22.5px;
+    margin-left: 1px;
+    margin-bottom: 1px;
 }
 
 /* Unread dialog */
@@ -1366,7 +1440,7 @@ body.body_im {
 
 
 /* Community fixed post + info */
-#page_body {
+#public>.wide_column_left, #group>.wide_column_left, #event>.wide_column_left, #profile>.wide_column_right {
     box-sizing: border-box;
     padding: 10px 10px 0;
 }
