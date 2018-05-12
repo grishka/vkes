@@ -16,10 +16,9 @@ function vkesIsSettingEnabled(name){
 	return true;
 }
 
-var vkesWideExpanded=false;
-
-if(vkesIsSettingEnabled("profiles_as_old")){
-	updateNarrow=function(){
+function vkesUpdateNarrow(){
+	//console.log("update narrow");
+	if(cur.module=="profile" || cur.module=="group" || cur.module=="public" || cur.module=="event"){
 		var nc=ge("narrow_column");
 		if(!nc)
 			return;
@@ -27,7 +26,7 @@ if(vkesIsSettingEnabled("profiles_as_old")){
 		nc.style.bottom="";
 		if(hasClass(nc, "fixed"))
 			removeClass(nc, "fixed");
-		if(vkesWideExpanded!=nc.offsetHeight<-nc.getBoundingClientRect().top && (cur.module=="profile" || cur.module=="group" || cur.module=="public" || cur.module=="event")){
+		if(vkesWideExpanded!=nc.offsetHeight<-nc.getBoundingClientRect().top){
 			vkesWideExpanded=!vkesWideExpanded;
 			if(vkesWideExpanded){
 				addClass(ge("wide_column"), "wide_expanded");
@@ -36,7 +35,16 @@ if(vkesIsSettingEnabled("profiles_as_old")){
 			}
 			vkesResizeZhukovLayout();
 		}
-	};
+	}
+}
+
+var vkesWideExpanded=false;
+
+if(vkesIsSettingEnabled("profiles_as_old")){
+	/*window.updateNarrow=function(){
+		
+	};*/
+	console.log(updateNarrow);
 }
 
 //window.addEventListener('load', function() {
@@ -86,7 +94,8 @@ function vkesOnPageLoaded(){
 	if(vkesIsSettingEnabled("reorder_left_menu"))
 		vkesApplyLeftMenuOrder();
 
-	updateLeftMenu=function(){};
+	/*window.__leftMenu.handleScroll=function(){};
+	removeClass(ge("side_bar"), "sticky_top");
 	var defaultStyles = {
       position: 'relative',
       marginTop: null,
@@ -94,7 +103,16 @@ function vkesOnPageLoaded(){
       top: null,
       bottom: null
     };
-    setStyle(ge('side_bar_inner'), defaultStyles);
+    setStyle(ge('side_bar_inner'), defaultStyles);*/
+
+    /*window.onBodyScroll=function(){
+    	console.log("here");
+    	updSideTopLink();
+    };*/
+    //console.log(getEventListeners(window));
+    window.__leftMenu.handleScroll=function(){};
+	removeClass(ge("side_bar"), "sticky_top");
+	window.addEventListener("scroll", vkesUpdateNarrow);
 
 	/*var xitem=document.createElement("a");
 	xitem.className="ui_actions_menu_item";
@@ -113,6 +131,93 @@ function vkesOnPageLoaded(){
 		console.log(elem.id);
 		return origGetSize(elem, withBounds, notBounding);
 	};*/
+
+	var observer=new MutationObserver(function(ev){
+		//console.log(ev);
+		for(var i=0;i<ev.length;i++){
+			var m=ev[i];
+			if(m.type=="childList"){
+				for(var j=0;j<m.addedNodes.length;j++){
+					var node=m.addedNodes[j];
+					//console.log(typeof(node));
+					if(node instanceof HTMLElement){
+						var posts=node.querySelectorAll(".post");
+						if(posts && posts.length){
+							//console.log("added node ", posts);
+							vkesTransformPosts(posts);
+						}
+					}
+				}
+			}
+		}
+	});
+	observer.observe(document.body, {childList: true, subtree: true});
+
+	var posts=document.body.querySelectorAll(".post");
+	if(posts && posts.length){
+		vkesTransformPosts(posts);
+	}
+}
+
+function vkesTransformPosts(posts){
+	for(var i=0;i<posts.length;i++){
+		var post=posts[i];
+		if(post.hasAttribute("data-vkes-transformed"))
+			continue;
+		post.setAttribute("data-vkes-transformed", "");
+		var likeBtn=post.querySelector(".post_content .like_wrap .like_btns > .like");
+		var repostBtn=post.querySelector(".post_content .like_wrap .like_btns > .share");
+		var commentBtn=post.querySelector(".post_content .like_wrap .like_btns > .comment");
+
+		if(!likeBtn){
+			console.log("skipping post", post);
+			continue;
+		}
+
+		var postID=post.getAttribute("data-post-id");
+
+		var likeLabel=likeBtn.querySelector(".like_button_label");
+		likeLabel.innerHTML=likeBtn.getAttribute("title");
+		likeBtn.insertBefore(likeLabel, likeBtn.querySelector(".like_button_icon"));
+		var likeCont=post.querySelector(".post_content .like_wrap .like_cont");
+		addClass(likeBtn, "_vkes_post_like");
+		likeCont.appendChild(likeBtn);
+		addClass(repostBtn, "_vkes_post_repost");
+		likeCont.appendChild(repostBtn);
+		post.querySelector(".post_content .like_wrap .like_btns").style.display="none"; // don't remove because something might still update that button
+
+		var postInfo=document.createElement("div");
+		postInfo.className="_vkes_post_info";
+		var postDate=post.querySelector(".post_header > .post_header_info .post_date");
+		postDate.style.display="inline";
+		postInfo.appendChild(postDate);
+		var postViews=post.querySelector(".post_content .like_wrap .like_views");
+		postViews.style.display="inline";
+		postInfo.appendChild(vkesMakeSeparator());
+		postInfo.appendChild(postViews);
+		if(commentBtn && commentBtn.getAttribute("data-count")==0 && ge("reply_box_wrap"+postID)){
+			postInfo.appendChild(vkesMakeSeparator());
+			var commentLink=commentBtn;
+			// window.cur.lang['wall_N_replies']
+			commentLink.innerHTML="Комментировать";
+			//commentLink.onclick=commentBtn.click;
+			postInfo.appendChild(commentLink);
+		}
+		likeCont.appendChild(postInfo);
+		likeCont.innerHTML+="<br clear=all/>";
+
+		var author=post.querySelector(".post_header_info > .post_author");
+		var contentWrap=post.querySelector(".post_info");
+		if(!contentWrap)
+			contentWrap=post.querySelector(".post_content").children[0];
+		contentWrap.insertBefore(author, contentWrap.children[0]);
+	}
+}
+
+function vkesMakeSeparator(){
+	var sep=document.createElement("span");
+	sep.innerHTML="&nbsp;|&nbsp;"
+	return sep;
 }
 
 function vkesReInjectCSS(){
@@ -120,6 +225,7 @@ function vkesReInjectCSS(){
 }
 
 function vkesResizeZhukovLayout(){
+	console.log("resize layout");
 	var postThumbs=document.querySelectorAll(".page_post_sized_thumbs");
 	if(postThumbs && postThumbs.length>0){
 		for(var i=0;i<postThumbs.length;i++){
@@ -277,6 +383,7 @@ function vkesTransformRMenuIntoTabs(){
 }
 
 function vkesApplyMessagesChanges(){
+
 	var topTabs=document.createElement("ul");
 	topTabs.className="ui_tabs";
 	topTabs.style.height="21px";
@@ -303,6 +410,8 @@ function vkesApplyMessagesChanges(){
 	var cont=document.querySelector(".ui_rmenu");
 	cont.insertBefore(topTabs, cont.children[0]);
 	var lastPeerTab, lastListTab;
+
+	//return;
 
 	if(document.querySelectorAll("._im_ui_peers_list>a").length==0)
 		hide(chatViewTab);
@@ -431,6 +540,7 @@ function vkesApplyMessagesChanges(){
 							observer.observe(document.querySelector(".im-page--mess-actions"), {attributes: true});
 
 							clearInterval(interval);
+
 						}else{
 							return;
 						}
@@ -469,7 +579,7 @@ function vkesApplyMessagesChanges(){
 							document.querySelector(".ms_item_more").innerHTML="Прикрепить";
 						}
 						rightAva.innerHTML=document.querySelector(".im-page--aside-photo").innerHTML;
-					}, 10);
+					}, 100);
 				}
 			}
 			peer=val;
