@@ -169,32 +169,36 @@ function vkesTransformPosts(posts){
 		var repostBtn=post.querySelector(".post_content .like_wrap .like_btns > .share");
 		var commentBtn=post.querySelector(".post_content .like_wrap .like_btns > .comment");
 
-		if(!likeBtn){
-			console.log("skipping post", post);
-			continue;
+		var postID=post.getAttribute("data-post-id");
+		var likeCont=post.querySelector(".post_content .like_wrap .like_cont");
+		if(!likeCont){
+			likeCont=document.createElement("div");
+			likeCont.className="like_cont";
+			post.querySelector(".post_content").appendChild(likeCont);
 		}
 
-		var postID=post.getAttribute("data-post-id");
-
-		var likeLabel=likeBtn.querySelector(".like_button_label");
-		likeLabel.innerHTML=likeBtn.getAttribute("title");
-		likeBtn.insertBefore(likeLabel, likeBtn.querySelector(".like_button_icon"));
-		var likeCont=post.querySelector(".post_content .like_wrap .like_cont");
-		addClass(likeBtn, "_vkes_post_like");
-		likeCont.appendChild(likeBtn);
-		addClass(repostBtn, "_vkes_post_repost");
-		likeCont.appendChild(repostBtn);
-		post.querySelector(".post_content .like_wrap .like_btns").style.display="none"; // don't remove because something might still update that button
-
+		if(likeBtn){
+			var likeLabel=likeBtn.querySelector(".like_button_label");
+			likeLabel.innerHTML=likeBtn.getAttribute("title");
+			likeBtn.insertBefore(likeLabel, likeBtn.querySelector(".like_button_icon"));
+			addClass(likeBtn, "_vkes_post_like");
+			likeCont.appendChild(likeBtn);
+			addClass(repostBtn, "_vkes_post_repost");
+			likeCont.appendChild(repostBtn);
+			post.querySelector(".post_content .like_wrap .like_btns").style.display="none"; // don't remove because something might still update that button
+		}
 		var postInfo=document.createElement("div");
 		postInfo.className="_vkes_post_info";
 		var postDate=post.querySelector(".post_header > .post_header_info .post_date");
 		postDate.style.display="inline";
 		postInfo.appendChild(postDate);
+
 		var postViews=post.querySelector(".post_content .like_wrap .like_views");
-		postViews.style.display="inline";
-		postInfo.appendChild(vkesMakeSeparator());
-		postInfo.appendChild(postViews);
+		if(postViews){
+			postViews.style.display="inline";
+			postInfo.appendChild(vkesMakeSeparator());
+			postInfo.appendChild(postViews);
+		}
 		if(commentBtn && commentBtn.getAttribute("data-count")==0 && ge("reply_box_wrap"+postID)){
 			postInfo.appendChild(vkesMakeSeparator());
 			var commentLink=commentBtn;
@@ -204,7 +208,6 @@ function vkesTransformPosts(posts){
 			postInfo.appendChild(commentLink);
 		}
 		likeCont.appendChild(postInfo);
-		likeCont.innerHTML+="<br clear=all/>";
 
 		var author=post.querySelector(".post_header_info > .post_author");
 		var contentWrap=post.querySelector(".post_info");
