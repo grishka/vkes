@@ -1544,7 +1544,11 @@ body.body_im {
 	display: block;
 	border-top: none;
 	padding: 0;
-	overflow: auto;
+}
+.like_cont:after{
+	clear: both;
+	content: "";
+	display: block;
 }
 ._vkes_post_like, ._vkes_post_repost{
 	float: right;

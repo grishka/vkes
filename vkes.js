@@ -139,9 +139,9 @@ function vkesOnPageLoaded(){
 			if(m.type=="childList"){
 				for(var j=0;j<m.addedNodes.length;j++){
 					var node=m.addedNodes[j];
-					//console.log(typeof(node));
+					//console.log(node);
 					if(node instanceof HTMLElement){
-						var posts=node.querySelectorAll(".post");
+						var posts=node.querySelectorAll(".post") || node.parentNode.querySelectorAll(".post");
 						if(posts && posts.length){
 							//console.log("added node ", posts);
 							vkesTransformPosts(posts);
@@ -164,6 +164,12 @@ function vkesTransformPosts(posts){
 		var post=posts[i];
 		if(post.hasAttribute("data-vkes-transformed"))
 			continue;
+		if(post.hasAttribute("data-ad")){
+			console.log("Removing ad post");
+			post.parentNode.removeChild(post);
+			continue;
+		}
+		console.log("Transforming post", post);
 		post.setAttribute("data-vkes-transformed", "");
 		var likeBtn=post.querySelector(".post_content .like_wrap .like_btns > .like");
 		var repostBtn=post.querySelector(".post_content .like_wrap .like_btns > .share");
