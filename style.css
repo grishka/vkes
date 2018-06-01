@@ -128,8 +128,16 @@ body{
 .pv_cont .pv_reply_form_wrap, .mv_playlist .mv_playlist_item, .im-typing, .page_doc_row, .ui_tabs.ui_tabs_box, .im-fwd .im-fwd--title,
 .box_msg, .settings_activity_history, .apps_access_item_info, .im-mess.im-mess_srv .im-mess--text, #pv_tag_info, .im-member-item .im-member-iterm--status,
 .im-member-item .im-member-item--invite, .page_media_place_label_inline, .fans_idol_row, .button_blue button, .button_gray button, .button_light_gray button,
-.top_notify_cont{
+.top_notify_cont, .blog_entry_text, .blog_entry_text_wrap .wk_text, .blog_cat_name{
 	font-size: 11px;
+}
+
+.blog_entry_text, .blog_entry_text_wrap .wk_text, .blog_cat_name{
+	line-height: 13px;
+}
+
+.blog_entry_title{
+	line-height: 15px;
 }
 
 .like_cont *{
@@ -147,10 +155,14 @@ input[type=search], input[type=submit], input[type=text], input[type~=email], in
 	font-weight: bold;
 }
 
-.page_name, h2.page_name, .tickets_header_title{
+.page_name, h2.page_name, .tickets_header_title, .blog_entry_title{
 	font-size: 13px;
 	color: #36638e;
 	font-weight: bold;
+}
+
+.blog_entry_title:hover{
+	text-decoration: underline;
 }
 
 .subheader, h4.subheader, .bd_header_info{
@@ -506,7 +518,7 @@ span.fc_contact_photo.online.mobile:after{
 .nim-peer .nim-peer--photo>img, .bp_img, .apps_feed_user_photo img, .settings_history_photo img, .search_item_img, .tickets_image__i,
 .tu_thumb, .group_u_photo_img, .settings_blb_photo_img, .bd_img, .bd_cell_img, .right_list_img, .fave_link_thumb, .ow_ava.ow_ava_comm,
 .payments_box_votes .payments_summary_phumb, .payments_transfer_to_photo, .im-member-item .im-member-item--photo img, .notify_tt_img, .notify_tt_thumb,
-.im-member-item .im-member-item--photo, .fans_idolph_wrap, .feedback_sticky_img{
+.im-member-item .im-member-item--photo, .fans_idolph_wrap, .feedback_sticky_img, .blog_entry_author_ava{
 	border-radius: 0 !important;
 }
 

@@ -63,19 +63,40 @@ if(vkesIsSettingEnabled("profiles_as_old")){
 function vkesOnAlDone(){
 	console.log("al done, module="+cur.module);
 	var wideModules=["apps", "app", "video", "ads"];
-	if((!cur.module && (location.pathname.length<5 || location.pathname.substr(0, 5)!="/dev/")) || (cur.module && wideModules.indexOf(cur.module)==-1)){
-		ge("page_body").style.width="627px";
-		ge("page_layout").style.width="790px";
-		if(cur.module=="profile" || cur.module=="public" || cur.module=="groups"){
-			vkesApplyProfileChanges();
+	if((!cur.module && (location.pathname.length<5 || location.pathname.substr(0, 5)!="/dev/") || (location.pathname.length<5 || location.pathname.substr(0, 5)!="/blog"))  || (cur.module && wideModules.indexOf(cur.module)==-1)){
+		if(window.blog){
+			// individual post
+			var postPos=document.querySelector(".blog_author_pos");
+			if(postPos){
+				postPos.innerHTML=postPos.innerHTML.replace("маркетинг", "зашквар");
+			}
+			// post list
+			var postAuthors=document.querySelectorAll(".blog_entry_author_info_short");
+			if(postAuthors){
+				for(var i=0;i<postAuthors.length;i++){
+					var postPos=postAuthors[i].children[postAuthors[i].children.length-1];
+					if(postPos){
+						postPos.innerHTML=postPos.innerHTML.replace("маркетинг", "зашквар");
+					}
+				}
+			}
+			ge("page_body").style.width="790px";
+			ge("page_layout").style.width="790px";
+			ge("wide_column").style.width="100%";
+		}else{
+			ge("page_body").style.width="627px";
+			ge("page_layout").style.width="790px";
+			if(cur.module=="profile" || cur.module=="public" || cur.module=="groups"){
+				vkesApplyProfileChanges();
+			}
+			if(cur.module=="feed"){
+				vkesApplyFeedChanges();
+			}
+			if(cur.module=="im"){
+				vkesApplyMessagesChanges();
+			}
+			vkesResizeZhukovLayout();
 		}
-		if(cur.module=="feed"){
-			vkesApplyFeedChanges();
-		}
-		if(cur.module=="im"){
-			vkesApplyMessagesChanges();
-		}
-		vkesResizeZhukovLayout();
 	}else if(cur.module!="app"){
 		if(parseInt(ge("page_layout").style.width)<960)
 			ge("page_body").style.width="795px";
